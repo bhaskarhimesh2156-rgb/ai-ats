@@ -9,54 +9,26 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
-        
         body {
             font-family: 'Space Grotesk', sans-serif;
-            background: #050505;
-            color: #e2e8f0;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+            background: #050505; color: #e2e8f0;
+            background-image: radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.15) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
         }
-
-        .neo-card {
-            background: rgba(15, 15, 20, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-        }
-
+        .neo-card { background: rgba(15, 15, 20, 0.8); border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border-radius: 24px; }
         .strength-card { border-left: 4px solid #10b981; background: rgba(16, 185, 129, 0.05); }
         .improvement-card { border-left: 4px solid #f43f5e; background: rgba(244, 63, 94, 0.05); }
-
-        .scan-line {
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #6366f1, transparent);
-            position: absolute;
-            animation: scan 2s linear infinite;
-        }
-
-        @keyframes scan {
-            0% { top: 0%; opacity: 0; }
-            50% { opacity: 1; }
-            100% { top: 100%; opacity: 0; }
-        }
-
+        .scan-line { width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #6366f1, transparent); position: absolute; animation: scan 2s linear infinite; }
+        @keyframes scan { 0% { top: 0%; opacity: 0; } 50% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
         .chart-container { position: relative; height: 250px; width: 250px; }
     </style>
 </head>
 <body class="p-6">
-
     <div class="max-w-7xl mx-auto">
         <header class="flex justify-between items-center mb-10">
             <div>
                 <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">ATS ANALYZER 2.0</h1>
                 <p class="text-gray-500 text-sm">Strategic Resume Audit System</p>
-            </div>
-            <div class="hidden md:block text-right">
-                <div class="text-xs text-indigo-400 font-mono">SYSTEM STATUS: READY</div>
-                <div class="text-xs text-gray-600 font-mono">LATENCY: 24ms</div>
             </div>
         </header>
 
@@ -66,13 +38,13 @@
                     <div id="scanner" class="hidden scan-line"></div>
                     <form id="uploadForm" class="space-y-6">
                         <div>
-                            <label class="text-xs uppercase tracking-widest font-bold text-gray-400 mb-2 block">Resume Engine (PDF)</label>
+                            <label class="text-xs uppercase tracking-widest font-bold text-gray-400 mb-2 block text-indigo-400">Resume Engine (PDF)</label>
                             <input type="file" id="resumeFile" accept=".pdf" required 
-                                class="w-full text-xs text-gray-400 file:bg-zinc-800 file:text-white file:border-0 file:py-2 file:px-4 file:rounded-lg file:mr-4 border border-zinc-800 p-2 rounded-xl bg-black/40">
+                                class="w-full text-xs text-gray-400 file:bg-zinc-800 file:text-white file:border-0 file:py-2 file:px-4 file:rounded-lg border border-zinc-800 p-2 rounded-xl bg-black/40">
                         </div>
                         <div>
-                            <label class="text-xs uppercase tracking-widest font-bold text-gray-400 mb-2 block">Target Requirements</label>
-                            <textarea id="jobDescription" rows="12" placeholder="Paste JD here..." required
+                            <label class="text-xs uppercase tracking-widest font-bold text-gray-400 mb-2 block text-indigo-400">Target Requirements</label>
+                            <textarea id="jobDescription" rows="10" placeholder="Paste Job Description here..." required
                                 class="w-full bg-black/40 border border-zinc-800 rounded-xl p-4 text-sm focus:border-indigo-500 transition-all outline-none"></textarea>
                         </div>
                         <button type="submit" id="submitBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2">
@@ -83,8 +55,7 @@
                 </div>
             </div>
 
-            <div id="resultBlock" class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6 opacity-0 transition-opacity duration-500">
-                
+            <div id="resultBlock" class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6 opacity-0 transition-opacity duration-700">
                 <div class="neo-card p-8 flex flex-col items-center justify-center text-center">
                     <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6">Match Distribution</h3>
                     <div class="chart-container">
@@ -99,32 +70,24 @@
                 <div class="space-y-6">
                     <div class="neo-card p-6 strength-card">
                         <div class="flex items-center gap-3 mb-4">
-                            <div class="p-2 bg-emerald-500/20 rounded-lg text-emerald-500">
-                                <i class="fas fa-check-double"></i>
-                            </div>
+                            <div class="p-2 bg-emerald-500/20 rounded-lg text-emerald-500"><i class="fas fa-check-double"></i></div>
                             <h3 class="font-bold">Key Strengths</h3>
                         </div>
-                        <div id="strengthsList" class="text-sm text-gray-400 space-y-2">
-                            Scan to see strengths...
-                        </div>
+                        <div id="strengthsList" class="text-sm text-gray-300 space-y-2"></div>
                     </div>
 
                     <div class="neo-card p-6 improvement-card">
                         <div class="flex items-center gap-3 mb-4">
-                            <div class="p-2 bg-rose-500/20 rounded-lg text-rose-500">
-                                <i class="fas fa-exclamation-triangle"></i>
-                            </div>
-                            <h3 class="font-bold">Critical Changes</h3>
+                            <div class="p-2 bg-rose-500/20 rounded-lg text-rose-500"><i class="fas fa-triangle-exclamation"></i></div>
+                            <h3 class="font-bold">Missing Skills</h3>
                         </div>
-                        <div id="improvementsList" class="text-sm text-gray-400 space-y-2">
-                            Scan to see required changes...
-                        </div>
+                        <div id="improvementsList" class="text-sm text-gray-300 space-y-2"></div>
                     </div>
                 </div>
                 
                 <div class="md:col-span-2 neo-card p-6">
-                    <h3 class="text-sm font-bold text-indigo-400 mb-4 tracking-widest uppercase">Full AI Breakdown</h3>
-                    <div id="fullAnalysis" class="text-sm text-gray-500 leading-relaxed font-light"></div>
+                    <h3 class="text-sm font-bold text-indigo-400 mb-4 tracking-widest uppercase">Strategic Advice</h3>
+                    <div id="fullAnalysis" class="text-sm text-gray-400 leading-relaxed space-y-2"></div>
                 </div>
             </div>
         </div>
@@ -138,9 +101,8 @@
             const submitBtn = document.getElementById('submitBtn');
             const scanner = document.getElementById('scanner');
             
-            // Animation
             submitBtn.disabled = true;
-            submitBtn.innerText = "PROCESSING...";
+            submitBtn.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> ANALYZING...`;
             scanner.classList.remove('hidden');
 
             const formData = new FormData();
@@ -152,51 +114,42 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    const resultText = data.ats_result;
-                    const scoreMatch = resultText.match(/(\d+)/);
-                    const score = scoreMatch ? parseInt(scoreMatch[0]) : 0;
-
-                    // Reveal and update
                     document.getElementById('resultBlock').classList.remove('opacity-0');
-                    updateChart(score);
-                    document.getElementById('scoreText').innerText = score + "%";
                     
-                    // Simple logic to split feedback into blocks
-                    // Note: In production, you'd want the AI to return JSON. 
-                    // Here we'll split the string for demonstration.
-                    const feedback = resultText.split('\n');
-                    document.getElementById('strengthsList').innerHTML = feedback.slice(0, 3).map(i => `• ${i}`).join('<br>');
-                    document.getElementById('improvementsList').innerHTML = feedback.slice(3, 6).map(i => `• ${i}`).join('<br>');
-                    document.getElementById('fullAnalysis').innerText = resultText;
+                    // Update Chart & Score
+                    updateChart(data.score);
+                    document.getElementById('scoreText').innerText = data.score + "%";
+
+                    // Update Lists
+                    document.getElementById('strengthsList').innerHTML = data.matching_skills.map(s => `• ${s}`).join('<br>');
+                    document.getElementById('improvementsList').innerHTML = data.missing_skills.map(s => `• ${s}`).join('<br>');
+                    document.getElementById('fullAnalysis').innerHTML = data.advice.map(a => `<p>→ ${a}</p>`).join('');
+                } else {
+                    alert("Error: " + data.error);
                 }
             } catch (err) {
-                alert("Server error");
+                alert("Critical Connection Error");
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerText = "INITIALIZE SCAN";
+                submitBtn.innerHTML = `<span>INITIALIZE SCAN</span> <i class="fas fa-microchip"></i>`;
                 scanner.classList.add('hidden');
             }
         };
 
         function updateChart(score) {
             const ctx = document.getElementById('matchChart').getContext('2d');
-            
             if (myChart) myChart.destroy();
-
             myChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
                     datasets: [{
                         data: [score, 100 - score],
                         backgroundColor: ['#6366f1', '#18181b'],
-                        borderWidth: 0,
-                        borderAlign: 'inner'
+                        borderWidth: 0
                     }]
                 },
                 options: {
                     cutout: '85%',
-                    responsive: true,
-                    maintainAspectRatio: false,
                     plugins: { tooltip: { enabled: false } },
                     animation: { duration: 2000, easing: 'easeOutQuart' }
                 }
